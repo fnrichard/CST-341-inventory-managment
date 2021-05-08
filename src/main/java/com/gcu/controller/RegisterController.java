@@ -3,7 +3,6 @@
 */
 package com.gcu.controller;
 
-
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -19,27 +18,32 @@ import com.gcu.model.User;
 @Controller
 @RequestMapping("/user")
 public class RegisterController {
-	
+
 	UserDatabase udb = new UserDatabase();
-	
-	@RequestMapping(path = "/register", method = RequestMethod.GET) 
+
+	@RequestMapping(path = "/register", method = RequestMethod.GET)
 	public ModelAndView displayForm() {
 		return new ModelAndView("register", "user", new User());
 	}
-	
-	
-	@RequestMapping(path="/confirmUser", method = RequestMethod.POST)
+
+	@RequestMapping(path = "/confirmUser", method = RequestMethod.POST)
 	public ModelAndView addUser(@ModelAttribute("user") @Valid User user, BindingResult result) {
-		//Here we will check for errors, database and add or check if exhists.
-		System.out.println("Before:");
-		boolean sub = udb.create(user);
-		if(result.hasErrors() && sub) {
-			return new ModelAndView("register", "user", user);
-		} else {
-			return new ModelAndView("confirmUser", "user", user);
+		// Here we will check for errors, database and add or check if exhists.
+		if (!result.hasErrors()) {
+			System.out.println("Before:");
+			switch (udb.create(user)) {
+			case 0:
+				return new ModelAndView("register", "user", user);
+			case 1:
+				return new ModelAndView("confirmUser", "user", user);
+			case 2:
+				return new ModelAndView("register", "user", user);
+			default:
+				return new ModelAndView("register", "user", user);
+			}
 		}
+		return new ModelAndView("register", "user", user);
+
 	}
-	
-	
 
 }
