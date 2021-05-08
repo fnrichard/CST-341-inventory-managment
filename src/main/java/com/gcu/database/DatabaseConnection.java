@@ -5,7 +5,8 @@ package com.gcu.database;
 
 public class DatabaseConnection {
 	
-	private String DBURL = "jdbc:mysql://remotemysql.com:3306/CSUJZvFHVA?autoReconnect=true&useSSL=false";
+	//private String DBURL = "jdbc:mysql://remotemysql.com:3306/CSUJZvFHVA?autoReconnect=true&useSSL=false";
+	private String DBURL = "jdbc:mysql://remotemysql.com:3306/CSUJZvFHVA";
 	private final String USERNAME = "CSUJZvFHVA";
 	private final String NAME = "CSUJZvFHVA";
 	private final String PASSWORD = "EcMHuKHa83";
