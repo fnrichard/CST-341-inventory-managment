@@ -1,3 +1,6 @@
+/*
+	@Author Alex J. Zoller
+*/
 package com.gcu.model;
 
 import java.sql.ResultSet;
