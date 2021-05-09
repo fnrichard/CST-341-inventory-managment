@@ -49,7 +49,6 @@ public class UserDatabase implements DataAccessInterfaceUser {
 		return found; 
 	}
 	
-	
 	public User loginUser(User t) {
 		User foundUser = new User();
 		for (User users : findAll()) {

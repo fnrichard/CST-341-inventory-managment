@@ -21,7 +21,6 @@ public class User {
 	
 	public User() {}
 	
-	
 	public User(int ID, String username, String password, String email) {
 		super();
 		this.ID = ID;
@@ -69,9 +68,4 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-
-
-	
-
 }
