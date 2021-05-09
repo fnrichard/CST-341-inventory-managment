@@ -50,7 +50,6 @@ public class UserDatabase implements DataAccessInterfaceUser {
 		return found; 
 	}
 	
-	
 	public User loginUser(User t) {
 		setDataSource(mysqlDataSource());
 		User foundUser = new User();
