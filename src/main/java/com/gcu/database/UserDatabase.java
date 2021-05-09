@@ -40,7 +40,6 @@ public class UserDatabase implements DataAccessInterfaceUser {
 	}
 
 	public boolean login(User t) {
-		setDataSource(mysqlDataSource());
 		boolean found = false;
 		for (User users : findAll()) {
 			if (users.getUsername().equals(t.getUsername()) && users.getPassword().equals(t.getPassword())) {
@@ -52,7 +51,6 @@ public class UserDatabase implements DataAccessInterfaceUser {
 	
 	
 	public User loginUser(User t) {
-		setDataSource(mysqlDataSource());
 		User foundUser = new User();
 		for (User users : findAll()) {
 			if (users.getUsername().equals(t.getUsername()) && users.getPassword().equals(t.getPassword())) {
@@ -62,12 +60,9 @@ public class UserDatabase implements DataAccessInterfaceUser {
 		return foundUser; 
 	}
 
-	public User userAmount() {
-		return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM User", User.class);
-	}
-
 	@Override
 	public List<User> findAll() {
+		setDataSource(mysqlDataSource());
 		List<User> users = new ArrayList<User>();
 		String sql = "SELECT * FROM CSUJZvFHVA.User";
 		users = jdbcTemplate.query(sql, new UserMapper());
@@ -76,6 +71,7 @@ public class UserDatabase implements DataAccessInterfaceUser {
 
 	@Override
 	public User findById(int id) {
+		setDataSource(mysqlDataSource());
 		String sql = "SELECT * FROM CSUJZvFHVA.User where id = ?";
 		return jdbcTemplate.queryForObject(sql, new Object[] { id }, new UserMapper());
 	}
@@ -112,15 +108,14 @@ public class UserDatabase implements DataAccessInterfaceUser {
 	@Override
 	public boolean update(User t) {
 		setDataSource(mysqlDataSource());
-
 		int id = 0;
 		User foundUser = new User();
 		boolean updated = false;
 		String sql = "";
 		// Fist we find the users id in the database;
 		for (User users : findAll()) {
-			if (users.getUsername().equals(t.getUsername()) || users.getPassword().equals(t.getPassword())
-					|| users.getEmail().equals(t.getEmail())) {
+			if (users.getUsername().equals(t.getUsername())
+					|| users.getEmail().equals(t.getEmail()) && users.getPassword().equals(t.getPassword())) {
 				id = users.getID();
 				foundUser = users;
 			}
