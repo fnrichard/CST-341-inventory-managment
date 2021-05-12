@@ -1,3 +1,6 @@
+/*
+	@Author Alex J. Zoller
+*/
 package com.gcu.controller;
 
 import org.springframework.stereotype.Controller;
@@ -14,7 +17,6 @@ public class HomeController {
 	
 	@RequestMapping(path="/home", method=RequestMethod.GET)
 	public ModelAndView displayForm() {
-		System.out.println("Hello! " + pdb.findAll().size());
 		return new ModelAndView("home", "products", pdb.findAll());
 	}
 	

@@ -1,3 +1,6 @@
+/*
+	@Author Alex J. Zoller
+*/
 package com.gcu.main;
 
 import org.springframework.stereotype.Controller;
