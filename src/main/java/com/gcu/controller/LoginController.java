@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gcu.model.User;
 
 import com.gcu.business.LoginService;
+import com.gcu.main.Cashe;
 
 @Controller
 public class LoginController {
@@ -26,7 +27,8 @@ public class LoginController {
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public ModelAndView login(@RequestParam("username") String username, @RequestParam("password") String password, ModelMap model) {
 		if (this.service.isValidLogin(username, password)) {
-			return new ModelAndView("home", "user", this.service.loginUser(username, password));
+			Cashe.loggedUser = this.service.loginUser(username, password);
+			return new ModelAndView("MainLanding", "user", this.service.loginUser(username, password));
 		} else {
 			User user = new User();
 			user.setUsername(username);

@@ -19,7 +19,7 @@
 		<tr>
 			<td><form:label path="email">Email:</form:label></td>
 			<td><form:input path="email" /></td>
-			<form:errors path="email"/>
+			<form:errors path="email" />
 		</tr>
 		<tr>
 			<td colspan="2"><input type="submit" value="Submit" /></td>

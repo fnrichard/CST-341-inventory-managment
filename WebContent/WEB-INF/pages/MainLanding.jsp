@@ -9,39 +9,49 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Manger</title>
+<%@ page import="com.gcu.main.Cashe" %>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Manger</title>
 </head>
 
 <body>
-  
-    <h1>Product Manager</h1>
-    <hr>
-          <h1>Thank you for choosing Product Manager !</h1>
-        <h2>Existing users</h2>
 
-       
-        
-        	<input type="submit" value="Log In" />
-            <button>Log In</button>
-           
-        
-                   
-            <h2>New customers</h2>
-            <p>
-                
-        	<input type="submit" value="Create Account" />
-        	
-       
-   
+	<h1>Thank you for choosing Product Manager !</h1>
+	
+	<% if (Cashe.loggedUser.getUsername().equals("Not Logged In")) {
+	%>
+	<h2>Existing users</h2>
+	<form:form method="GET" action="/MilestoneProject/login"
+		modelAttribute="user">
+		<input type="submit" value="Login" />
+	</form:form>
+	
+	<h2>New customers</h2>
+	<form:form method="GET" action="/MilestoneProject/user/register"
+		modelAttribute="user">
+		<input type="submit" value="Register" />
+	</form:form>
+	
+	<%} else { %>
+	<h2>Home Page</h2>
+	<form:form method="GET" action="/MilestoneProject/home"
+		modelAttribute="product">
+		<input type="submit" value="home" />
+	</form:form>
+	
+	<%}%>
+	
+	
 
 
-        <h2>Contact us</h2>
-        <a href="C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Outlook.lnk">Email us @
-            Tobedeterminedlater@someemail.com</a>
-        
+	
+	
+	
+	
+	
+
 </body>
 
 </html>

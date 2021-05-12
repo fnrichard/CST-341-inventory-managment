@@ -1,3 +1,8 @@
 <div align="center">
-	<h5>Footer here</h5>
+<hr>
+	<p>
+	<h2>Contact us</h2>
+	<a
+		href="C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Outlook.lnk">Email
+		us @ Tobedeterminedlater@someemail.com</a>
 </div>
