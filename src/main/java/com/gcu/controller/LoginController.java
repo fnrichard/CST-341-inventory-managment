@@ -17,6 +17,8 @@ import com.gcu.main.Cashe;
 
 @Controller
 public class LoginController {
+	
+	
 	private LoginService service = new LoginService();
 	
 	@RequestMapping(path="/login", method=RequestMethod.GET)

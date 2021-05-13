@@ -13,7 +13,7 @@
    <mvc:annotation-driven />
    <mvc:resources mapping="/resources/**" location="/WEB-INF/resources/"/>
    <mvc:default-servlet-handler/>
- 
+   <context:annotation-config/>
  
   	<bean id="viewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>
  	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
@@ -34,8 +34,10 @@
     </bean>
     
     <!-- Application Spring Beans -->
-    
-    
+    <bean id="loginController" class="com.gcu.controller.LoginController"></bean>
+    <bean id="registerController" class="com.gcu.controller.RegisterController"></bean>
+    <bean id="userDatabase" class="com.gcu.database.UserDatabase"></bean>
+    <bean id="productDatabase" class="com.gcu.database.ProductDatabase"></bean>
    
  </beans>
  

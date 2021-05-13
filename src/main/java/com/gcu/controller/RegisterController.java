@@ -5,6 +5,7 @@ package com.gcu.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,14 +13,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gcu.database.UserDatabase;
+import com.gcu.database.DataAccessInterfaceUser;
+import com.gcu.model.Product;
 import com.gcu.model.User;
 
 @Controller
 @RequestMapping("/user")
 public class RegisterController {
 
-	UserDatabase udb = new UserDatabase();
+	public DataAccessInterfaceUser udb;
+	
+	@Autowired
+	public void setUserDatabase(DataAccessInterfaceUser service) {
+		this.udb = service;
+	}
+	
+	
 
 	@RequestMapping(path = "/register", method = RequestMethod.GET)
 	public ModelAndView displayForm() {

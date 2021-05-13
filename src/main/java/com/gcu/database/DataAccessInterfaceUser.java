@@ -14,5 +14,7 @@ public interface DataAccessInterfaceUser {
 	public int create(User t);
 	public boolean update(User t);
 	public boolean delete(User t);
+	public boolean login(User t);
+	public User loginUser(User t);
 
 }
