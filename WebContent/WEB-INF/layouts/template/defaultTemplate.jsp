@@ -14,15 +14,19 @@
 
 <body>
 	<!-- Header -->
-	<tiles:insertAttribute name="header" />
-
+	<div class="header">
+		<tiles:insertAttribute name="header" />
+	</div>
+	
 	<!-- Body Page -->
-	<div align="center">
+	<div class="body" align="center">
 		<tiles:insertAttribute name="body" />
 	</div>
-
+	
 	<!-- Footer Page -->
-	<tiles:insertAttribute name="footer" />
+	<div class="footer">
+		<tiles:insertAttribute name="footer" />
+	</div>
 </body>
 
 </html>

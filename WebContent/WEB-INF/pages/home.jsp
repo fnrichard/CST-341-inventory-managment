@@ -2,11 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<h3>Welcome ${user.username }!</h3>
-
 <form:form method="GET" action="/MilestoneProject/home"
 	modelAttribute="product">
-<h2>Products:</h2>
+<h3>Product Listing</h3>
 	<table>
 		<th>ID</th>
 		<th>Name</th>
@@ -26,9 +24,7 @@
 	</form:form>
 	
 	<form:form method="GET" action="/MilestoneProject/createProduct" modelAttribute="product">
-	<tr>
-			<td><input type="submit" value="Create Product"/></td>
-	</tr>
+		<input type="submit" value="Create Product"/>
 	</form:form>
 	
 	

@@ -26,7 +26,7 @@
 			<form:errors path="productDescription" />
 		</tr>
 		<tr>
-			<td colspan="2"><input type="submit" value="Create" /></td>
+			<td colspan="2" style="text-align: right;"><input type="submit" value="Create" /></td>
 		</tr>
 		<form:errors path="*" />
 	</table>

@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<h3>Please Login:</h3>
+<h3>Please Login</h3>
 <form:form method="POST" action="/MilestoneProject/login"
 	modelAttribute="user">
 	<c:if test="${not empty user.username}">
@@ -25,7 +25,8 @@
 			</td>
 		</tr>
         <tr>
-			<td><input type="submit" value="Submit"/></td>
+        	<td>&nbsp;</td>
+			<td style="text-align: right;"><input type="submit" value="Submit"/></td>
 		</tr>
 	</table>
 </form:form>
