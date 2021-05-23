@@ -12,6 +12,10 @@ public class Cashe {
 	
 	public static User loggedUser = new User(0, "Not Logged In", "", "");
 
+	public static void clearUser() {
+		loggedUser = new User(0, "Not Logged In", "", "");
+	}
+	
 	public static User getLoggedUser() {
 		return loggedUser;
 	}

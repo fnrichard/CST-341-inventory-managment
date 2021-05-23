@@ -9,6 +9,9 @@
 <div class="head-data">
 	<div class="logged-in">
 		Logged in as: <% out.print(Cashe.getLoggedUser().getUsername()); %>
+		<% if (Cashe.loggedUser.getUsername().equals("Not Logged In") == false) {%>
+			<a href="/MilestoneProject/logout">Logout</a>
+		<%}%>
 	</div>
 		
 	<div class="menu">
