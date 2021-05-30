@@ -4,8 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <h3>Please Login</h3>
-<form:form method="POST" action="/MilestoneProject/login"
-	modelAttribute="user">
+<form:form method="POST" action="/MilestoneProject/login" modelAttribute="user">
 	<c:if test="${not empty user.username}">
 		<div style="color: red;">
     		Login or password is incorrect.

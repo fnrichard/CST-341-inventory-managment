@@ -3,7 +3,9 @@
 */
 package com.gcu.database;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -63,17 +65,19 @@ public class ProductDatabase implements DataAccessInterface<Product> {
 	@Override
 	public boolean update(Product t) {
 		Product compare = findById(t.getID());
+		boolean updated = false;
 		if (!compare.getProductName().equals(t.getProductName()))
-			return (jdbcTemplate.update("update CSUJZvFHVA.Product set ProductName = ? where id = ?", t.getID()) == 1);
+			updated =  (jdbcTemplate.update("update CSUJZvFHVA.Product set ProductName = ? where id = ?", t.getProductName(), t.getID()) == 1);
 		if (compare.getProductCost() != t.getProductCost())
-			return (jdbcTemplate.update("update CSUJZvFHVA.Product set ProductCost = ? where id = ?", t.getID()) == 1);
+			updated = (jdbcTemplate.update("update CSUJZvFHVA.Product set ProductCost = ? where id = ?", t.getProductCost(), t.getID()) == 1);
 		if (compare.getProductAmount() != t.getProductAmount())
-			return (jdbcTemplate.update("update CSUJZvFHVA.Product set ProductAmount = ? where id = ?",
+			updated = (jdbcTemplate.update("update CSUJZvFHVA.Product set ProductAmount = ? where id = ?",
+					t.getProductAmount(), t.getID()) == 1);
+		if (!compare.getProductDescription().equals(t.getProductDescription()))
+			updated = (jdbcTemplate.update("update CSUJZvFHVA.Product set ProductDescription = ? where id = ?",
+					t.getProductDescription(),
 					t.getID()) == 1);
-		if (compare.getProductDescription().equals(t.getProductDescription()))
-			return (jdbcTemplate.update("update CSUJZvFHVA.Product set ProductDescription = ? where id = ?",
-					t.getID()) == 1);
-		return false;
+		return updated;
 	}
 
 	@Override
@@ -81,4 +85,12 @@ public class ProductDatabase implements DataAccessInterface<Product> {
 		return (jdbcTemplate.update("delete from CSUJZvFHVA.Product where id = ?", t.getID()) == 1);
 	}
 
+	// written by Richard Williamson
+	@Override
+	public List<Product> queryWithString(String query) {
+		setDataSource(mysqlDataSource());
+		// I don't like this but not sure how to avoid sql injection
+        String sql = "SELECT * FROM CSUJZvFHVA.Product where productDescription like '%" + query + "%' or productName like '%" + query + "%'";
+        return jdbcTemplate.query(sql, new ProductMapper());
+	}
 }
