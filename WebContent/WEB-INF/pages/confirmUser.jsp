@@ -4,7 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <h3>Confirm Account:</h3>
-<form:form method="POST" action="/MilestoneProject/login"
+<form:form method="GET" action="/MilestoneProject/login"
 	modelAttribute="user">
 <table>
 	<th>Username: ${user.username}</th>

@@ -65,19 +65,19 @@ public class ProductDatabase implements DataAccessInterface<Product> {
 	@Override
 	public boolean update(Product t) {
 		Product compare = findById(t.getID());
-		boolean updated = false;
+		int changes = 0;
 		if (!compare.getProductName().equals(t.getProductName()))
-			updated =  (jdbcTemplate.update("update CSUJZvFHVA.Product set ProductName = ? where id = ?", t.getProductName(), t.getID()) == 1);
+			changes =  (jdbcTemplate.update("update CSUJZvFHVA.Product set ProductName = ? where id = ?", t.getProductName(), t.getID()));
 		if (compare.getProductCost() != t.getProductCost())
-			updated = (jdbcTemplate.update("update CSUJZvFHVA.Product set ProductCost = ? where id = ?", t.getProductCost(), t.getID()) == 1);
+			changes = (jdbcTemplate.update("update CSUJZvFHVA.Product set ProductCost = ? where id = ?", t.getProductCost(), t.getID()));
 		if (compare.getProductAmount() != t.getProductAmount())
-			updated = (jdbcTemplate.update("update CSUJZvFHVA.Product set ProductAmount = ? where id = ?",
-					t.getProductAmount(), t.getID()) == 1);
+			changes = (jdbcTemplate.update("update CSUJZvFHVA.Product set ProductAmount = ? where id = ?",
+					t.getProductAmount(), t.getID()));
 		if (!compare.getProductDescription().equals(t.getProductDescription()))
-			updated = (jdbcTemplate.update("update CSUJZvFHVA.Product set ProductDescription = ? where id = ?",
+			changes = (jdbcTemplate.update("update CSUJZvFHVA.Product set ProductDescription = ? where id = ?",
 					t.getProductDescription(),
-					t.getID()) == 1);
-		return updated;
+					t.getID()));
+		return changes > 1;
 	}
 
 	@Override
@@ -94,3 +94,4 @@ public class ProductDatabase implements DataAccessInterface<Product> {
         return jdbcTemplate.query(sql, new ProductMapper());
 	}
 }
+
