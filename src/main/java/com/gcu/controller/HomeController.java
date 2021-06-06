@@ -3,11 +3,14 @@
 */
 package com.gcu.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gcu.database.DataAccessInterface;
@@ -27,11 +30,6 @@ public DataAccessInterface<Product> pdb;
 	@RequestMapping(path="/home", method=RequestMethod.GET)
 	public ModelAndView displayForm() {
 		return new ModelAndView("home", "products", pdb.findAll());
-	}
-	
-	@RequestMapping(path="/search", method=RequestMethod.GET)
-	public ModelAndView searchProducts(@RequestParam("query") String query) {
-		return new ModelAndView("home", "products", pdb.queryWithString(query));
 	}
 	
 	@RequestMapping(path="/delete", method=RequestMethod.GET)
@@ -59,5 +57,17 @@ public DataAccessInterface<Product> pdb;
 			pdb.update(product);
 		}
 		return new ModelAndView("home", "products", pdb.findAll());
+	}
+	
+	@RequestMapping(path="/search", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Product> searchProducts(@RequestParam("query") String query) {
+		return  pdb.queryWithString(query);
+	}
+	
+	@RequestMapping(path="/products", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Product> listProducts() {
+		return  pdb.findAll();
 	}
 }

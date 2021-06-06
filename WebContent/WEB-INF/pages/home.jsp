@@ -5,53 +5,88 @@
 
 <script>
 	// script tag added by Richard
-	// retrieved from https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-	function getParameterByName(name, url = window.location.href) {
-	    name = name.replace(/[\[\]]/g, '\\$&');
-	    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'), results = regex.exec(url);
-	    if (!results) return null;
-	    if (!results[2]) return '';
-	    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+	function setLoading() {
+		$('#products').html("<tr><td colspan='6'>Loading...</td></tr>");
 	}
-	window.onload = function() {
-		try {
-			const query = getParameterByName('query');
-			if (query) {
-				document.getElementById('query').value = query;
-			}
-		} catch (e) {
-			// do nothing but twittle thumbs and ignore... this is fine
+	
+	function getProducts() {
+		setLoading();
+		$.get('/MilestoneProject/products', function(data, status) {
+			buildTableWithProducts(data);
+		});
+	}
+	
+	function buildTableWithProducts(products) {
+		let html = "";
+		if (!products || !products.length) {
+			html = "<tr><td colspan='6'>No entries found</td></tr>";	
+		} else {
+			products.forEach(function(product) {
+				html += "<tr>"
+					  + "	<td>" + product.id + "</td>"
+				      + "	<td>" + product.productName + "</td>"
+				      + "	<td>" + product.productCost + "</td>"
+				      + "	<td>" + product.productAmount + "</td>"
+				      + "	<td>" + product.productDescription + "</td>"
+				      + "	<td>"
+				      + "	    <a href='/MilestoneProject/edit?id=" + product.id + "'>Edit</a> | "
+				      + "       <a href='/MilestoneProject/delete?id=" + product.id + "'>Delete</a>"
+				      + "   </td>"
+				      + "</tr>";
+			});
 		}
+		$('#products').html(html);
 	}
+	
+	
+	$(function() { // window onload
+		let queryLastValue = "";
+		$('#search-button').click(function() { // button click
+			setLoading();
+			const query = $('#query').val();
+			queryLastValue = query;
+			$.get('/MilestoneProject/search?query=' + query, function(data, status) {
+				buildTableWithProducts(data);
+			});
+		});
+	
+		$('#query').blur(function() {
+			const query = $('#query').val();
+			if (query === "" && queryLastValue !== query) {
+				queryLastValue = query;
+				getProducts();
+			}
+		});
+	
+		// load all products
+		getProducts();
+	});
 </script>
 
 <h3>Product Listing</h3>
 
-<form:form method="GET" action="/MilestoneProject/search">
+<div style="margin-bottom: 0.4rem">
 	<input type="text" id="query" name="query" />
-	<input type="submit" value="Search Products"/>
-</form:form>
+	<input type="button" id="search-button" value="Search Products" />
+</div>
 
 <form:form method="GET" action="/MilestoneProject/home" modelAttribute="product">
 	<table>
-		<th>ID</th>
-		<th>Name</th>
-		<th>Cost</th>
-		<th>Amount</th>
-		<th>Description</th>
-		<th></th>
-		<th></th>
-			<c:forEach var = "product" items = "${products}" varStatus="tagStatus">
-				<tr>
-					<td>${product.ID}</td>
-					<td>${product.productName}</td>
-					<td>${product.productCost}</td>
-					<td>${product.productAmount}</td>
-					<td>${product.productDescription}</td>
-					<td><a href="/MilestoneProject/delete?id=${product.ID}">Delete</a></td>
-					<td><a href="/MilestoneProject/edit?id=${product.ID}">Edit</a></td>
-				</tr>
-			</c:forEach>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Cost</th>
+				<th>Amount</th>
+				<th>Description</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody id="products">
+			<tr>
+				<td colspan="6">Loading...</td>
+			</tr>
+		</tbody>
 	</table>
 	</form:form>
 	

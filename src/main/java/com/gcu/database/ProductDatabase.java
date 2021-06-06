@@ -94,4 +94,3 @@ public class ProductDatabase implements DataAccessInterface<Product> {
         return jdbcTemplate.query(sql, new ProductMapper());
 	}
 }
-
