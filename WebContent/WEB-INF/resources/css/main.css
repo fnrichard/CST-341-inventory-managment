@@ -57,7 +57,7 @@ label {
 
 .logo {
 	color: #111;
-	font-size: 32pt;
+	font-size: 16pt;
 	font-weight: bolder;
 }
 
@@ -65,7 +65,7 @@ label {
 	background-color: #f70;
 	border-bottom: 0.1rem solid #222;
 	color: #fff;
-	padding: 0.4rem;
+	padding: 0.8rem;
 	text-align: center;
 	max-height: 4.2rem;
 }

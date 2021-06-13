@@ -21,7 +21,7 @@
 		if (!products || !products.length) {
 			html = "<tr><td colspan='6'>No entries found</td></tr>";	
 		} else {
-			products.forEach(function(product) {
+			products.forEach(function(product) { 
 				html += "<tr>"
 					  + "	<td>" + product.id + "</td>"
 				      + "	<td>" + product.productName + "</td>"
